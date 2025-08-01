@@ -187,3 +187,15 @@ as well as custom instructions.
 [] Create an example of a deep coding agent built on top of this
 [] Benchmark the example of [deep research agent](examples/research/research_agent.py)
 [] Add human-in-the-loop support for tools
+
+## Added InitChatModel [Ollama Qwen3](https://ollama.com/library/qwen3)
+
+Initial runs of out-of-box setup was took $1+, made mistake on first running `.invoke` instead of `.stream`
+
+```py
+init_chat_model(
+    model="ollama:qwen3:14b",
+    temperature=0.0,
+    max_tokens=40000,
+)
+```

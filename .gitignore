@@ -56,7 +56,7 @@ cover/
 *.pot
 
 # Django stuff:
-*.log
+# *.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
@@ -208,3 +208,4 @@ __marimo__/
 
 # LangGraph
 .langgraph_api
+**/logs/agent_*.log

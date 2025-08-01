@@ -1,3 +1,6 @@
 deepagents
 langgraph-cli[inmem]
 tavily-python
+langchain-openai
+langchain-ollama
+langchain-mcp-adapters
