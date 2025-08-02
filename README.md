@@ -180,6 +180,36 @@ You can also specify [custom sub agents](#subagents--optional-) with their own i
 Sub agents are useful for ["context quarantine"](https://www.dbreunig.com/2025/06/26/how-to-fix-your-context.html#context-quarantine) (to help not pollute the overall context of the main agent)
 as well as custom instructions.
 
+## Adding Langchain MCP Adapter
+
+The `deepagents` library can be ran with MCP tools. This can be extended with the [Langchain MCP Adapter](https://github.com/langchain-ai/langchain-mcp-adapters?tab=readme-ov-file#langchain-mcp-adapters).
+
+(To run the example below, will need to `pip install langchain-mcp-adapter`)
+
+```python
+import asyncio
+from langchain_mcp_adapters.client import MultiServerMCPClient
+from deepagents import create_deep_agent
+
+async def main():
+    # Collect MCP tools
+    mcp_client = MultiServerMCPClient(...)
+    mcp_tools = await mcp_client.get_tools()
+
+    # Create agent
+    agent = create_deep_agent(
+        tools=mcp_tools,
+        instructions=research_instructions,
+        subagents=[critique_sub_agent, research_sub_agent],
+    ).with_config({"recursion_limit": 1000})
+
+    # Stream the agent
+    async for chunk in agent.astream({"messages": [{"role": "user", "content": "what is langgraph?"}]})
+        print(chunk)
+
+asyncio.run(main())
+```
+
 ## Roadmap
 - [ ] Allow users to customize full system prompt
 - [ ] Code cleanliness (type hinting, docstrings, formating)
